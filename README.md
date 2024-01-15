@@ -7,7 +7,16 @@
 ## Aplication Details
 Simple API microservice which have nginx as frontend app and passes traffic to flask app which will store name and email to the backend RDS database
 
-
+## Configuration Details
+Application incudes deployments for nginx and flask API. Flask API will store data in RDS MySQL database. 
+Used HPA for nginx and flask apps to autoscale and minimize downtime. 
+Resource limits have been set in the deployments
+Used Secrets to store creds and ConfigMaps for storing configuration details. 
+Used Helm for package management and the code can be reused for different environments like production, staging, dev etc..
+Used Production, staging and dev as roles in ansible and the roles will be using the helm chart template and the perticular values.yaml can be used for change values.
+Two docker images have been build for using in this application.
+For better monitoring and managing, we can add helm charts like prometheus, grafana etc.. 
+As there are different strategies for rolling updates, I would suggest canary strategy as it is been implimented gradually to full infra, for that we can use service mesh like istio.
 
 ## Installation
 
