@@ -1,0 +1,17 @@
+- name: Create a k8s namespace
+  kubernetes.core.k8s:
+    name: dev
+    api_version: v1
+    kind: Namespace
+    state: present
+    kubeconfig: /Users/chchandr/.kube/conf_linode
+
+- name: Deploy Helm Chart in dev
+  kubernetes.core.helm:
+    kubeconfig: /Users/chchandr/.kube/conf_linode
+    name: my-dev-release
+    chart_ref: "{{ playbook_dir }}/helm_charts/webapp"
+    release_namespace: dev
+    release_state: present
+    values_files:
+      - "{{ playbook_dir }}/roles/dev/files/values.yaml"

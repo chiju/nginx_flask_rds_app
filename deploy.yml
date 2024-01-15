@@ -1,0 +1,7 @@
+---
+- name: Deploy Helm Charts
+  hosts: localhost
+  roles:
+    - production
+    - staging
+    - dev

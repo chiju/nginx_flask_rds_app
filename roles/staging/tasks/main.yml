@@ -1,0 +1,17 @@
+- name: Create a k8s namespace
+  kubernetes.core.k8s:
+    name: staging
+    api_version: v1
+    kind: Namespace
+    state: present
+    kubeconfig: /Users/chchandr/.kube/conf_linode
+
+- name: Deploy Helm Chart in staging
+  kubernetes.core.helm:
+    kubeconfig: /Users/chchandr/.kube/conf_linode
+    name: my-staging-release
+    chart_ref: "{{ playbook_dir }}/helm_charts/webapp"
+    release_namespace: staging
+    release_state: present
+    values_files:
+      - "{{ playbook_dir }}/roles/staging/files/values.yaml"
