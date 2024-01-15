@@ -1,0 +1,14 @@
+# webapp-chart/templates/flaskapp-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: flask-service
+spec:
+  ports:
+    - port: {{ .Values.flaskapp.service.port }}
+      protocol: TCP
+      targetPort: 5000
+  selector:
+    app: flaskapp
+  type: {{ .Values.flaskapp.service.type }}

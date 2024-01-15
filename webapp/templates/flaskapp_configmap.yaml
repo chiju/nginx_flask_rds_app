@@ -1,0 +1,11 @@
+# webapp-chart/templates/flaskapp-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: mysql-config
+data:
+  MYSQL_DATABASE_USER: {{ .Values.mysql.user }}
+  MYSQL_DATABASE_DB: {{ .Values.mysql.database }}
+  MYSQL_DATABASE_HOST: {{ .Values.mysql.host }}
+  MYSQL_DATABASE_PORT: "{{ .Values.mysql.port }}"

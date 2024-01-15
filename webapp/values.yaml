@@ -1,0 +1,39 @@
+# Default values for your Helm chart
+namespace: webapp
+
+flaskapp:
+  replicas: 1
+  image: chiju/flask-api:latest
+  resources:
+    limits:
+      cpu: "1"
+      memory: "512Mi"
+    requests:
+      cpu: "0.5"
+      memory: "256Mi"
+  service:
+    port: 80
+    type: LoadBalancer
+  hpa:
+    minReplicas: 1
+    maxReplicas: 5
+    targetCPUUtilizationPercentage: 50
+
+frontend:
+  replicas: 1
+  image: chiju/nginxform:latest
+  containerPort: 80
+  hpa:
+    minReplicas: 1
+    maxReplicas: 5
+    targetCPUUtilizationPercentage: 50
+
+mysql:
+  user: webapp
+  database: flaskapi
+  host: 'webapp.chisiaic41v8.ap-southeast-2.rds.amazonaws.com'
+  port: "3306"
+
+loadbalancer:
+  port: 80
+  targetPort: 80

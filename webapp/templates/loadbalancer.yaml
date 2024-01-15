@@ -1,0 +1,13 @@
+# webapp-chart/templates/loadbalancer.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: loadbalancer
+spec:
+  type: LoadBalancer
+  ports:
+    - port: {{ .Values.loadbalancer.port }}
+      targetPort: {{ .Values.loadbalancer.targetPort }}
+  selector:
+    app: nginx

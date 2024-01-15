@@ -1,0 +1,56 @@
+# webapp-chart/templates/flaskapp-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: flaskapp-deployment
+  labels:
+    app: flaskapp
+spec:
+  replicas: {{ .Values.flaskapp.replicas }}
+  selector:
+    matchLabels:
+      app: flaskapp
+  template:
+    metadata:
+      labels:
+        app: flaskapp
+    spec:
+      containers:
+        - name: flaskapp
+          image: {{ .Values.flaskapp.image }}
+          ports:
+            - containerPort: 5000
+          env:
+            - name: MYSQL_DATABASE_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: MYSQL_DATABASE_USER
+            - name: MYSQL_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_DATABASE_PASSWORD
+            - name: MYSQL_DATABASE_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: MYSQL_DATABASE_DB
+            - name: MYSQL_DATABASE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: MYSQL_DATABASE_HOST
+            - name: MYSQL_DATABASE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: MYSQL_DATABASE_PORT
+          resources:
+            limits:
+              cpu: {{ .Values.flaskapp.resources.limits.cpu }}
+              memory: {{ .Values.flaskapp.resources.limits.memory }}
+            requests:
+              cpu: {{ .Values.flaskapp.resources.requests.cpu }}
+              memory: {{ .Values.flaskapp.resources.requests.memory }}
