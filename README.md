@@ -2,7 +2,7 @@
 
 ## Architecture Diagram
 
-![diagram](files/application_Diagram.drawio.png)
+![diagram](files/application_Diagramm.drawio.png)
 
 ## Aplication Details
 Simple API microservice which have nginx as frontend app and passes traffic to flask app which will store name and email to the backend RDS database
