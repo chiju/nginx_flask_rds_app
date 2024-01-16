@@ -18,7 +18,7 @@ Flask docker image have been build adn pushed to dockerhub for using in this app
 For better monitoring and managing, we can add helm charts like prometheus, grafana etc.. 
 As there are different strategies for rolling updates, I would suggest canary strategy as it is been implimented gradually to full infra, for that we can use service mesh like istio.
 
-**Note:** Used linode LKE cluster as free tier is not available for AWS EKS, if we have AWS EKS cluster we can repalce the cluster
+**Note:** Used Linode LKE kubernetes cluster as free tier is not available for AWS EKS, if we have AWS EKS cluster we can repalce the cluster
 
 ## Tools Used
 
