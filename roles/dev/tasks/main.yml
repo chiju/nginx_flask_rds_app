@@ -1,6 +1,6 @@
 - name: Create a k8s namespace
   kubernetes.core.k8s:
-    name: dev
+    name: "{{ values_content.namespace }}"
     api_version: v1
     kind: Namespace
     state: present
@@ -11,7 +11,7 @@
     kubeconfig: /Users/chchandr/.kube/conf_linode
     name: my-dev-release
     chart_ref: "{{ playbook_dir }}/helm_charts/webapp"
-    release_namespace: dev
+    release_namespace: "{{ values_content.namespace }}"
     release_state: present
     values_files:
       - "{{ playbook_dir }}/roles/dev/files/values.yaml"

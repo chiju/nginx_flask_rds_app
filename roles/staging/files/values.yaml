@@ -21,7 +21,7 @@ flaskapp:
 
 frontend:
   replicas: 1
-  image: chiju/nginxform:latest
+  image: nginx:latest
   containerPort: 80
   hpa:
     minReplicas: 1
@@ -29,10 +29,11 @@ frontend:
     targetCPUUtilizationPercentage: 50
 
 mysql:
-  user: webapp
-  database: flaskapi
-  host: 'webapp.chisiaic41v8.ap-southeast-2.rds.amazonaws.com'
-  port: "3306"
+  user: xxx
+  database: xxx
+  host: 'xxxx'
+  port: "xxx"
+  password: xxxxx
 
 loadbalancer:
   port: 80

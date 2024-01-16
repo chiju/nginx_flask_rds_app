@@ -3,7 +3,8 @@ namespace: production
 
 flaskapp:
   replicas: 1
-  image: chiju/flask-api:latest
+  image: chiju/flask-api
+  tag: v3
   resources:
     limits:
       cpu: "1"
@@ -13,7 +14,7 @@ flaskapp:
       memory: "256Mi"
   service:
     port: 80
-    type: LoadBalancer
+    type: ClusterIP
   hpa:
     minReplicas: 1
     maxReplicas: 5
@@ -21,7 +22,8 @@ flaskapp:
 
 frontend:
   replicas: 1
-  image: chiju/nginxform:latest
+  image: nginx
+  tag: latest
   containerPort: 80
   hpa:
     minReplicas: 1
@@ -33,6 +35,7 @@ mysql:
   database: flaskapi
   host: 'webapp.chisiaic41v8.ap-southeast-2.rds.amazonaws.com'
   port: "3306"
+  password: cXdlcnR5MTIzNDU2Iw==
 
 loadbalancer:
   port: 80

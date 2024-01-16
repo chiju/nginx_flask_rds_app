@@ -18,6 +18,13 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: {{ .Values.frontend.image }}
+        image: {{ .Values.frontend.image }}:{{ .Values.frontend.tag }}
         ports:
         - containerPort: {{ .Values.frontend.containerPort }}
+        volumeMounts:
+            - name: nginx-config-volume
+              mountPath: /etc/nginx/conf.d
+      volumes:
+      - name: nginx-config-volume
+        configMap:
+          name: nginx-config

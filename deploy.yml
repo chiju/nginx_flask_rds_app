@@ -3,5 +3,5 @@
   hosts: localhost
   roles:
     - production
-    - staging
-    - dev
+    # - staging
+    # - dev

@@ -1,7 +1,10 @@
-
+- name: Include values from values.yaml in files folder
+  set_fact:
+    values_content: "{{ lookup('file', 'files/values.yaml') | from_yaml }}"
+        
 - name: Create a k8s namespace
   kubernetes.core.k8s:
-    name: production
+    name: "{{ values_content.namespace }}"
     api_version: v1
     kind: Namespace
     state: present
@@ -12,7 +15,7 @@
     kubeconfig: /Users/chchandr/.kube/conf_linode
     name: my-production-release
     chart_ref: "{{ playbook_dir }}/helm_charts/webapp"
-    release_namespace: production
+    release_namespace: "{{ values_content.namespace }}"
     release_state: present
     values_files:
       - "{{ playbook_dir }}/roles/production/files/values.yaml"
