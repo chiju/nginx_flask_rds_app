@@ -31,11 +31,11 @@ frontend:
     targetCPUUtilizationPercentage: 50
 
 mysql:
-  user: webapp
-  database: flaskapi
-  host: 'webapp.chisiaic41v8.ap-southeast-2.rds.amazonaws.com'
-  port: "3306"
-  password: cXdlcnR5MTIzNDU2Iw==
+  user: xxx
+  database: xxx
+  host: 'xxxx'
+  port: "xxx"
+  password: xxxxx
 
 loadbalancer:
   port: 80
